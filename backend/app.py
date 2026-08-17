@@ -52,7 +52,7 @@ def predict_sales_forecast():
     print(f"Raw model output (log): {predicted_store_sales}")
 
     # Convert predicted_price to Python float
-    predicted_sales_forecast = round(float(predicted_sales), 2)
+    predicted_sales_forecast = round(float(predicted_store_sales), 2)
     # The conversion above is needed as we convert the model prediction (log price) to actual price using np.exp, which returns predictions as NumPy float32 values.
     # When we send this value directly within a JSON response, Flask's jsonify function encounters a datatype error
 
