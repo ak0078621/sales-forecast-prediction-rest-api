@@ -63,33 +63,22 @@ def predict_sales_forecast():
 # Define an endpoint for batch prediction (POST request)
 @sales_forecast_predictor_api.post('/v1/sales-forecast-batch')
 def predict_sales_forecast_batch():
-    """
-    This function handles POST requests to the '/v1/sales-forecast-batch' endpoint.
-    It expects a CSV file containing product, store and sales details details for multiple stores
-    and returns the predicted sales forecast for stores as a dictionary in the JSON response. 
-    """
-    # Get the uploaded CSV file from the request
     file = request.files['file']
-
-    # Read the CSV file into a Pandas DataFrame
     input_data = pd.read_csv(file)
 
-    # Convert age to establishment year and rename columns
+    # Transform columns to match what the model was trained on
     input_data['Store_Establishment_Year'] = 2026 - input_data['Store_Age_Years']
     input_data = input_data.rename(columns={'Product_Type_Category': 'Product_Type'})
-    input_data = input_data.drop(columns=['Store_Age_Years'])
 
-    # Make predictions for all properties in the DataFrame (get log_prices)
+    # Drop columns the model doesn't use
+    input_data = input_data.drop(columns=['Store_Age_Years', 'Product_Id_char'], errors='ignore')
+
     predicted_store_sales = model.predict(input_data).tolist()
+    predicted_sales = [round(float(sale), 2) for sale in predicted_store_sales]
 
-    # Calculate actual prices
-    predicted_sales = [round(float(product_store_sales), 2) for product_store_sales in predicted_store_sales]
+    product_ids = list(range(1, len(input_data) + 1))
+    output_dict = dict(zip(product_ids, predicted_sales))
 
-    # Create a dictionary of predictions with property IDs as keys
-    product_ids = input_data['id'].tolist()  # Assuming 'id' is the property ID column
-    output_dict = dict(zip(product_ids, predicted_sales))  # Use actual prices
-
-    # Return the predictions dictionary as a JSON response
     return output_dict
 
 # Run the Flask application in debug mode if this script is executed directly
