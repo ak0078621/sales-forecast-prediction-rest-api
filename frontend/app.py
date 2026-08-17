@@ -20,7 +20,6 @@ productType = st.selectbox("Product Type", ["Frozen Foods", "Dairy", "Canned", "
        "Hard Drinks", "Fruits and Vegetables", "Breads", "Soft Drinks",
        "Breakfast", "Others", "Starchy Foods", "Seafood"])
 productMRP = st.number_input("Product MRP", min_value=0.0, step=1, value=2) 
-storeId = st.selectbox("Stores", ["OUT004", "OUT003", "OUT001", "OUT002"])
 storeEstablishmentYear = st.selectbox("Store Year of Establishment", options=range(1950, 2027), index=24)
 storeSize = st.selectbox("Store size", ["High", "Medium", "Low"])
 storeLocationCityType = st.selectbox("Store Location City Type", ["Tier 1","Tier 2","Tier 3"])
@@ -32,8 +31,7 @@ input_data = pd.DataFrame([{
     'Product_Sugar_Content': productSugarContent,
     'Product_Allocated_Area': productAllocatedArea,
     'Product_Type': productType,
-    'Product_MRP': productMRP,
-    'Store_Id': storeId,                          
+    'Product_MRP': productMRP,                         
     'Store_Establishment_Year': storeEstablishmentYear,
     'Store_Size': storeSize,
     'Store_Location_City_Type': storeLocationCityType,
