@@ -58,7 +58,7 @@ def predict_sales_forecast():
     # When we send this value directly within a JSON response, Flask's jsonify function encounters a datatype error
 
     # Return the actual price
-    return jsonify({'Predicted sales forecast': predicted_sales})
+    return jsonify({'Predicted sales forecast': predicted_sales_forecast})
 
 
 # Define an endpoint for batch prediction (POST request)
