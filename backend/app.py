@@ -43,7 +43,7 @@ def predict_sales_forecast_batch():
     input_data = pd.read_csv(file)
 
     # Save product IDs before dropping
-    product_ids = input_data['Product_Id_char'].tolist()
+    product_ids = [f"{char}_{i+1}" for i, char in enumerate(input_data['Product_Id_char'])]
 
     # Transform columns to match model training
     input_data['Store_Establishment_Year'] = 2026 - input_data['Store_Age_Years']
