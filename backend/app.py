@@ -37,7 +37,7 @@ def predict_sales_forecast():
         'Product_Allocated_Area': property_data['Product_Allocated_Area'],
         'Product_Type': property_data['Product_Type_Category'],
         'Product_MRP': property_data['Product_MRP'],
-        'Store_Establishment_Year': property_data['Store_Age_Years'],
+        'Store_Establishment_Year': 2026 - property_data['Store_Age_Years'],
         'Store_Size': property_data['Store_Size'],
         'Store_Location_City_Type': property_data['Store_Location_City_Type'],
         'Store_Type': property_data['Store_Type']
@@ -74,11 +74,16 @@ def predict_sales_forecast_batch():
     # Read the CSV file into a Pandas DataFrame
     input_data = pd.read_csv(file)
 
+    # Convert age to establishment year and rename columns
+    input_data['Store_Establishment_Year'] = 2026 - input_data['Store_Age_Years']
+    input_data = input_data.rename(columns={'Product_Type_Category': 'Product_Type'})
+    input_data = input_data.drop(columns=['Store_Age_Years'])
+
     # Make predictions for all properties in the DataFrame (get log_prices)
     predicted_store_sales = model.predict(input_data).tolist()
 
     # Calculate actual prices
-    predicted_sales = [round(float(np.exp(product_store_sales)), 2) for product_store_sales in predicted_store_sales]
+    predicted_sales = [round(float(product_store_sales), 2) for product_store_sales in predicted_store_sales]
 
     # Create a dictionary of predictions with property IDs as keys
     product_ids = input_data['id'].tolist()  # Assuming 'id' is the property ID column
