@@ -11,6 +11,8 @@ st.title("SuperKart Store Sales Forecast Prediction")
 # Section for online prediction
 st.subheader("Online Prediction")
 
+
+
 # Collect user input for property features
 productWeight = st.number_input("Product Weight", min_value=0.0, max_value=100.0, step=1.0, value=90.0)
 productSugarContent = st.selectbox("Product Sugar Content", ["Low Sugar", "Regular", "No Sugar"])
@@ -25,17 +27,21 @@ storeSize = st.selectbox("Store size", ["High", "Medium", "Low"])
 storeLocationCityType = st.selectbox("Store Location City Type", ["Tier 1","Tier 2","Tier 3"])
 storeType = st.selectbox("Store Type", ["Departmental Store","Supermarket Type1","Supermarket Type2","Food Mart"])
 
+
 # Convert user input into a DataFrame
 input_data = pd.DataFrame([{
     'Product_Weight': productWeight,
     'Product_Sugar_Content': productSugarContent,
     'Product_Allocated_Area': productAllocatedArea,
-    'Product_Type': productType,
-    'Product_MRP': productMRP,                         
-    'Store_Establishment_Year': storeEstablishmentYear,
+    'Product_MRP': productMRP,
     'Store_Size': storeSize,
     'Store_Location_City_Type': storeLocationCityType,
     'Store_Type': storeType
+    'Product_Type_Category': productType,
+    'Store_Age_Years': storeEstablishmentYear,
+    
+    
+    
 }])
 
 # Make prediction when the "Predict" button is clicked
