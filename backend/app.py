@@ -49,8 +49,12 @@ def predict_sales_forecast():
     # Make prediction (get Product_Store_Sales_Total)
     predicted_store_sales = model.predict(input_data)[0]
 
+    print(f"Raw model output (log): {predicted_store_sales}")
+
     # Calculate actual price
     predicted_sales = np.exp(predicted_store_sales)
+
+    print(f"After exp: {predicted_sales}")
 
     # Convert predicted_price to Python float
     predicted_sales_forecast = round(float(predicted_sales), 2)
