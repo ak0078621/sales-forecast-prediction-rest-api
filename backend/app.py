@@ -35,9 +35,9 @@ def predict_sales_forecast():
         'Product_Weight': property_data['Product_Weight'],
         'Product_Sugar_Content': property_data['Product_Sugar_Content'],
         'Product_Allocated_Area': property_data['Product_Allocated_Area'],
-        'Product_Type': property_data['Product_Type'],
+        'Product_Type': property_data['Product_Type_Category'],
         'Product_MRP': property_data['Product_MRP'],
-        'Store_Establishment_Year': property_data['Store_Establishment_Year'],
+        'Store_Establishment_Year': property_data['Store_Age_Years'],
         'Store_Size': property_data['Store_Size'],
         'Store_Location_City_Type': property_data['Store_Location_City_Type'],
         'Store_Type': property_data['Store_Type']
