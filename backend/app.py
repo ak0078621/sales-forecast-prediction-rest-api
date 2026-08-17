@@ -37,7 +37,6 @@ def predict_sales_forecast():
         'Product_Allocated_Area': property_data['Product_Allocated_Area'],
         'Product_Type': property_data['Product_Type'],
         'Product_MRP': property_data['Product_MRP'],
-        'Store_Id': property_data['Store_Id'],
         'Store_Establishment_Year': property_data['Store_Establishment_Year'],
         'Store_Size': property_data['Store_Size'],
         'Store_Location_City_Type': property_data['Store_Location_City_Type'],
